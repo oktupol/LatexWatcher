@@ -14,7 +14,18 @@ Following software must be installed:
 - [Docker](https://docs.docker.com/engine/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Usage
+## Set-Up
+
+### Using Git
+
+Execute following command to create the necessary project directory structure
+and `docker-compose.yaml`:
+
+```sh
+git clone --depth 1 --branch example https://github.com/oktupol/latex-watcher.git
+```
+
+### Manual
 
 Create following directory structure:
 
@@ -44,6 +55,8 @@ volumes:
     driver: local
 ```
 
+## Usage
+
 Start the watcher using the command:
 
 ```sh
@@ -55,3 +68,14 @@ change, it will compile it and place the generated PDF in the `destination`
 directory. You can now edit your `.tex` files using your favourite editor and
 open a PDF-viewer to see the changes immediately whenever you save your
 progress.
+
+## Optional configuration
+
+Following environment variables exist and can be overridden in
+`docker-compose.yaml`:
+
+- **WATCH_MODE** - Possible values:
+    - `true` - the watcher continuously monitors the `source` directory until it
+      is manually stopped.
+    - `false` - the watcher checks for updates in the `source` directory once,
+      builds the PDF files for changed tex files, then exits.
